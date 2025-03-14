@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이음상사 트레킹 미션</title>
+    <style>
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('fonts/neodgm.ttf') format('truetype');
+        }
+
+        .character-mission {
+            font-family: 'CustomFont', sans-serif;
+}
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        body {
+            background: url('background.png') no-repeat center center/cover;
+            font-family: 'Press Start 2P', cursive;
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        input {
+            font-size: 16px;
+            padding: 10px;
+            border: 2px solid white;
+            background: rgba(255, 255, 255, 0.8);
+            color: black;
+            width: 80%;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            background: #ffcc00;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background: #ffdd44;
+            transform: scale(1.05);
+        }
+
+        .result {
+            margin-top: 20px;
+            display: none;
+            background: rgba(255, 255, 255, 0.8);
+            color: black;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .character-img {
+            width: 100px;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .character-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .character-mission {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>이음상사 트레킹 미션</h1>
+        <p>이름을 입력하고 캐릭터를 확인하세요!</p>
+        <input type="text" id="nameInput" placeholder="이름 입력">
+        <button onclick="assignCharacter()">확인</button>
+        <div class="result" id="resultBox">
+            <h2 class="character-name" id="characterName"></h2>
+            <img id="characterImage" class="character-img" src="" alt="캐릭터 이미지">
+            <p class="character-mission" id="characterMission"></p>
+        </div>
+    </div>
+    
+    <script>
+        const sheetUrl = 'https://script.google.com/macros/s/AKfycbz8YY1oEUaxv9caTwT-djWtMMPte0BoJ07j8BlOMnXe4LzZ4ekgsxiz4aj0MTVyPKqU/exec';
+
+        async function assignCharacter() {
+            const nameInput = document.getElementById("nameInput").value.trim();
+            if (!nameInput) {
+                alert("이름을 입력해주세요!");
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${sheetUrl}?name=${encodeURIComponent(nameInput)}`);
+                const data = await response.json();
+                
+                if (data.character) {
+                    displayCharacter(data);
+                } else {
+                    alert("모든 캐릭터가 배정되었습니다!");
+                }
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+                alert("캐릭터 정보를 불러오는 중 오류가 발생했습니다.");
+            }
+        }
+
+        function displayCharacter(characterData) {
+            document.getElementById("characterName").innerText = characterData.character;
+            document.getElementById("characterImage").src = characterData.image;
+            document.getElementById("characterMission").innerText = characterData.mission;
+            document.getElementById("resultBox").style.display = "block";
+        }
+    </script>
+</body>
+</html>
