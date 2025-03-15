@@ -34,16 +34,6 @@
             max-width: 400px;
         }
 
-        h1 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        p {
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-
         input {
             font-size: 16px;
             padding: 10px;
@@ -53,7 +43,7 @@
             width: 80%;
             border-radius: 5px;
             text-align: center;
-            margin-bottom: 10px; /* 여백 추가 */
+            margin-bottom: 10px;
         }
 
         button {
@@ -63,13 +53,6 @@
             border: none;
             cursor: pointer;
             border-radius: 10px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-            transition: all 0.2s;
-        }
-
-        button:hover {
-            background: #ffdd44;
-            transform: scale(1.05);
         }
 
         .result {
@@ -79,30 +62,12 @@
             color: black;
             padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .character-img {
-            width: 100px;
-            height: auto;
-            margin-top: 10px;
-        }
-
-        .character-name {
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 10px;
         }
 
         .character-mission-difficulty {
             font-size: 14px;
             font-weight: bold;
             color: red;
-            margin-top: 5px;
-        }
-
-        .character-mission {
-            font-size: 14px;
             margin-top: 5px;
         }
     </style>
@@ -116,7 +81,7 @@
         <div class="result" id="resultBox">
             <h2 class="character-name" id="characterName"></h2>
             <img id="characterImage" class="character-img" src="" alt="캐릭터 이미지">
-            <p class="character-mission-difficulty" id="characterMissionDifficulty"></p> <!-- 미션 난이도 추가 -->
+            <p class="character-mission-difficulty" id="characterMissionDifficulty"></p>
             <p class="character-mission" id="characterMission"></p>
         </div>
     </div>
@@ -136,22 +101,15 @@
                 const data = await response.json();
                 
                 if (data.character) {
-                    displayCharacter(data);
-                } else {
-                    alert("모든 캐릭터가 배정되었습니다!");
+                    document.getElementById("characterName").innerText = data.character;
+                    document.getElementById("characterImage").src = data.image;
+                    document.getElementById("characterMissionDifficulty").innerText = `난이도: ${data.missionDifficulty}`;
+                    document.getElementById("characterMission").innerText = data.mission;
+                    document.getElementById("resultBox").style.display = "block";
                 }
             } catch (error) {
-                console.error("Error fetching data: ", error);
-                alert("캐릭터 정보를 불러오는 중 오류가 발생했습니다.");
+                alert("데이터를 불러오는 중 오류가 발생했습니다.");
             }
-        }
-
-        function displayCharacter(characterData) {
-            document.getElementById("characterName").innerText = characterData.character;
-            document.getElementById("characterImage").src = characterData.image;
-            document.getElementById("characterMissionDifficulty").innerText = `난이도: ${characterData.missionDifficulty}`; // 미션 난이도 추가
-            document.getElementById("characterMission").innerText = characterData.mission;
-            document.getElementById("resultBox").style.display = "block";
         }
     </script>
 </body>
