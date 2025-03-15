@@ -32,48 +32,8 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             width: 90%;
             max-width: 400px;
-            position: relative;
         }
 
-        h1 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        p {
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-
-        input {
-            font-size: 16px;
-            padding: 10px;
-            border: 2px solid white;
-            background: rgba(255, 255, 255, 0.8);
-            color: black;
-            width: 80%;
-            border-radius: 5px;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        button {
-            font-size: 16px;
-            padding: 10px 20px;
-            background: #ffcc00;
-            border: none;
-            cursor: pointer;
-            border-radius: 10px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-            transition: all 0.2s;
-        }
-
-        button:hover {
-            background: #ffdd44;
-            transform: scale(1.05);
-        }
-
-        /* ✅ resultBox가 항상 숨겨진 상태에서 시작하도록 보장 */
         .result {
             display: none !important;
             background: rgba(255, 255, 255, 0.8);
@@ -84,11 +44,6 @@
             width: 90%;
             max-width: 300px;
             text-align: center;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             margin-top: 20px;
         }
 
@@ -96,24 +51,6 @@
             width: 80px;
             height: auto;
             margin-top: 10px;
-        }
-
-        .character-name {
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .character-mission-difficulty {
-            font-size: 14px;
-            font-weight: bold;
-            color: red;
-            margin-top: 5px;
-        }
-
-        .character-mission {
-            font-size: 14px;
-            margin-top: 5px;
         }
     </style>
 </head>
@@ -125,7 +62,6 @@
         <button onclick="assignCharacter()">확인</button>
     </div>
 
-    <!-- ✅ resultBox가 처음에는 보이지 않도록 설정 -->
     <div class="result" id="resultBox">
         <h2 class="character-name" id="characterName"></h2>
         <img id="characterImage" class="character-img" src="" alt="캐릭터 이미지">
@@ -134,7 +70,6 @@
     </div>
     
     <script>
-        // ✅ 페이지 로드 시 resultBox를 숨김
         window.onload = function() {
             document.getElementById("resultBox").style.display = "none";
         };
@@ -143,25 +78,39 @@
 
         async function assignCharacter() {
             const nameInput = document.getElementById("nameInput").value.trim();
+            
             if (!nameInput) {
                 alert("이름을 입력해주세요!");
                 return;
             }
-            
+
+            console.log("✅ 이름 입력됨:", nameInput);
+
             try {
                 const response = await fetch(`${sheetUrl}?name=${encodeURIComponent(nameInput)}`);
+                console.log("✅ API 응답 수신:", response);
+
+                if (!response.ok) {
+                    throw new Error("❌ 서버 응답 오류: " + response.status);
+                }
+
                 const data = await response.json();
-                
+                console.log("✅ 변환된 JSON 데이터:", data);
+
                 if (data.character) {
                     document.getElementById("characterName").innerText = data.character;
                     document.getElementById("characterImage").src = data.image;
                     document.getElementById("characterMissionDifficulty").innerText = `난이도: ${data.missionDifficulty}`;
                     document.getElementById("characterMission").innerText = data.mission;
-                    
-                    // ✅ 이름 입력 후에만 표시
+
                     document.getElementById("resultBox").style.display = "block";
+                    console.log("✅ resultBox 표시됨");
+                } else {
+                    alert("❌ 캐릭터 데이터를 받지 못했습니다.");
+                    console.log("❌ API 응답이 예상과 다릅니다:", data);
                 }
             } catch (error) {
+                console.error("❌ 오류 발생:", error);
                 alert("데이터를 불러오는 중 오류가 발생했습니다.");
             }
         }
