@@ -34,44 +34,6 @@
             max-width: 400px;
         }
 
-        h1 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        p {
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-
-        input {
-            font-size: 16px;
-            padding: 10px;
-            border: 2px solid white;
-            background: rgba(255, 255, 255, 0.8);
-            color: black;
-            width: 80%;
-            border-radius: 5px;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        button {
-            font-size: 16px;
-            padding: 10px 20px;
-            background: #ffcc00;
-            border: none;
-            cursor: pointer;
-            border-radius: 10px;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-            transition: all 0.2s;
-        }
-
-        button:hover {
-            background: #ffdd44;
-            transform: scale(1.05);
-        }
-
         .result {
             margin-top: 20px;
             display: none;
@@ -82,12 +44,18 @@
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
             width: 90%;
             max-width: 300px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .character-img {
-            width: 80px; /* 크기 조절 */
+            width: 80px;
             height: auto;
             margin-top: 10px;
+            display: block;
         }
 
         .character-name {
@@ -97,6 +65,7 @@
         }
 
         .character-mission-difficulty {
+            font-family: 'CustomFont', sans-serif !important;
             font-size: 14px;
             font-weight: bold;
             color: red;
@@ -104,18 +73,18 @@
         }
 
         .character-mission {
+            font-family: 'CustomFont', sans-serif !important;
             font-size: 14px;
             margin-top: 5px;
         }
 
-        /* 반응형 설정 */
         @media (max-width: 600px) {
             .container {
                 width: 95%;
                 padding: 15px;
             }
             .character-img {
-                width: 70px; /* 모바일에서 이미지 크기 줄이기 */
+                width: 70px;
             }
             .character-name {
                 font-size: 16px;
