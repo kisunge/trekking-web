@@ -10,11 +10,8 @@
             src: url('fonts/neodgm.ttf') format('truetype');
         }
 
-        .character-mission {
-            font-family: 'CustomFont', sans-serif;
-}
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-        
+
         body {
             background: url('background.png') no-repeat center center/cover;
             font-family: 'Press Start 2P', cursive;
@@ -56,6 +53,7 @@
             width: 80%;
             border-radius: 5px;
             text-align: center;
+            margin-bottom: 10px; /* 여백 추가 */
         }
 
         button {
@@ -96,6 +94,13 @@
             margin-top: 10px;
         }
 
+        .character-mission-difficulty {
+            font-size: 14px;
+            font-weight: bold;
+            color: red;
+            margin-top: 5px;
+        }
+
         .character-mission {
             font-size: 14px;
             margin-top: 5px;
@@ -111,12 +116,13 @@
         <div class="result" id="resultBox">
             <h2 class="character-name" id="characterName"></h2>
             <img id="characterImage" class="character-img" src="" alt="캐릭터 이미지">
+            <p class="character-mission-difficulty" id="characterMissionDifficulty"></p> <!-- 미션 난이도 추가 -->
             <p class="character-mission" id="characterMission"></p>
         </div>
     </div>
     
     <script>
-        const sheetUrl = 'https://script.google.com/macros/s/AKfycbwSWfmwJWVE7vqRuvuHAJ8wED6JWq7Dg-ssvW_qeWkV7f1ApvBEZXbfY0Xfhf0FIPJH/exec';
+        const sheetUrl = 'https://script.google.com/macros/s/AKfycbz8YY1oEUaxv9caTwT-djWtMMPte0BoJ07j8BlOMnXe4LzZ4ekgsxiz4aj0MTVyPKqU/exec';
 
         async function assignCharacter() {
             const nameInput = document.getElementById("nameInput").value.trim();
@@ -143,6 +149,7 @@
         function displayCharacter(characterData) {
             document.getElementById("characterName").innerText = characterData.character;
             document.getElementById("characterImage").src = characterData.image;
+            document.getElementById("characterMissionDifficulty").innerText = `난이도: ${characterData.missionDifficulty}`; // 미션 난이도 추가
             document.getElementById("characterMission").innerText = characterData.mission;
             document.getElementById("resultBox").style.display = "block";
         }
