@@ -73,7 +73,7 @@
             transform: scale(1.05);
         }
 
-        /* ✅ resultBox 내부 텍스트 폰트 적용 */
+        /* ✅ resultBox 기본적으로 숨김 */
         .result {
             position: absolute;
             top: 50%;
@@ -91,7 +91,6 @@
             font-family: 'CustomFont', sans-serif; /* ✅ neodgm.ttf 적용 */
         }
 
-        /* resultBox 내부 개별 요소에도 폰트 적용 */
         .character-name,
         .character-mission-difficulty,
         .character-mission {
@@ -129,12 +128,13 @@
         <p>이름을 입력하고 캐릭터를 확인하세요!</p>
         <input type="text" id="nameInput" placeholder="이름 입력">
         <button onclick="assignCharacter()">확인</button>
-        <div class="result" id="resultBox">
-            <h2 class="character-name" id="characterName"></h2>
-            <img id="characterImage" class="character-img" src="" alt="캐릭터 이미지">
-            <p class="character-mission-difficulty" id="characterMissionDifficulty"></p>
-            <p class="character-mission" id="characterMission"></p>
-        </div>
+    </div>
+
+    <div class="result" id="resultBox">
+        <h2 class="character-name" id="characterName"></h2>
+        <img id="characterImage" class="character-img" src="" alt="캐릭터 이미지">
+        <p class="character-mission-difficulty" id="characterMissionDifficulty"></p>
+        <p class="character-mission" id="characterMission"></p>
     </div>
     
     <script>
@@ -154,8 +154,12 @@
                 if (data.character) {
                     document.getElementById("characterName").innerText = data.character;
                     document.getElementById("characterImage").src = data.image;
-                    document.getElementById("characterMissionDifficulty").innerText = `난이도 : ${data.missionDifficulty}`;
+                    document.getElementById("characterMissionDifficulty").innerText = `난이도: ${data.missionDifficulty}`;
                     document.getElementById("characterMission").innerText = data.mission;
+
+                    // ✅ container 숨기기
+                    document.querySelector(".container").style.display = "none";
+                    // ✅ resultBox 표시
                     document.getElementById("resultBox").style.display = "block";
                 }
             } catch (error) {
