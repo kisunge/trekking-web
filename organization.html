@@ -60,13 +60,20 @@
         }
 
         .member-card img {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: auto;
+            aspect-ratio: 1/1; /* 정사각형 비율 유지 */
+            border-radius: 10px; /* 이미지 둥글게 */
         }
-
-        .member-card .info {
-            text-align: left;
-            flex-grow: 1;
+        
+        .member-card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 15px; /* 여백 추가 */
+            min-height: 80px; /* 높이 확보 */
+            display: flex;
+            align-items: center; /* 세로 중앙 정렬 */
+            gap: 15px; /* 요소 간 간격 조정 */
         }
 
         .difficulty {
@@ -123,7 +130,7 @@
                             <img src="images/${member.image}" alt="${member.character}">
                             <div class="info">
                                 <strong>${member.name} (${member.character})</strong><br>
-                                <span class="difficulty">난이도: ${member.missionDifficulty}</span>
+                                <span class="difficulty">미션 난이도 : ${member.missionDifficulty}</span>
                             </div>
                         `;
                         memberContainer.appendChild(memberCard);
