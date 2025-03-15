@@ -82,6 +82,8 @@
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
             width: 90%;
             max-width: 300px;
+
+            /* ✅ 중앙 정렬 */
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -90,7 +92,7 @@
         }
 
         .character-img {
-            width: 80px; /* 크기 조절 */
+            width: 80px;
             height: auto;
             margin-top: 10px;
         }
@@ -113,14 +115,13 @@
             margin-top: 5px;
         }
 
-        /* 반응형 설정 */
         @media (max-width: 600px) {
             .container {
                 width: 95%;
                 padding: 15px;
             }
             .character-img {
-                width: 70px; /* 모바일에서 이미지 크기 줄이기 */
+                width: 70px;
             }
             .character-name {
                 font-size: 16px;
