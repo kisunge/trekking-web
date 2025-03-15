@@ -32,6 +32,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             width: 90%;
             max-width: 400px;
+            position: relative;
         }
 
         h1 {
@@ -72,9 +73,13 @@
             transform: scale(1.05);
         }
 
+        /* ✅ resultBox 중앙 정렬 & 기본적으로 숨김 */
         .result {
-            margin-top: 20px;
-            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none; /* 기본적으로 숨김 */
             background: rgba(255, 255, 255, 0.8);
             color: black;
             padding: 15px;
@@ -82,13 +87,7 @@
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
             width: 90%;
             max-width: 300px;
-
-            /* ✅ 중앙 정렬 */
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
         }
 
         .character-img {
@@ -113,22 +112,6 @@
         .character-mission {
             font-size: 14px;
             margin-top: 5px;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                width: 95%;
-                padding: 15px;
-            }
-            .character-img {
-                width: 70px;
-            }
-            .character-name {
-                font-size: 16px;
-            }
-            .character-mission-difficulty, .character-mission {
-                font-size: 12px;
-            }
         }
     </style>
 </head>
