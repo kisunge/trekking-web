@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>팀 조직도</title>
+    <style>
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('fonts/neodgm.ttf') format('truetype');
+        }
+
+        body {
+            font-family: 'CustomFont', sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .team-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .team {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+        }
+
+        .team h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .member {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .member-card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .member-card img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .member-card .info {
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .difficulty {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>팀 조직도</h1>
+    <div class="team-container" id="teamContainer"></div>
+
+    <script>
+        const sheetUrl = 'https://script.google.com/macros/s/AKfycbz8YY1oEUaxv9caTwT-djWtMMPte0BoJ07j8BlOMnXe4LzZ4ekgsxiz4aj0MTVyPKqU/exec';
+
+        async function loadOrganizationChart() {
+            try {
+                const response = await fetch(sheetUrl);
+                const data = await response.json();
+
+                // 데이터를 팀별로 분류
+                const teams = {};
+                data.forEach(member => {
+                    if (!teams[member.team]) {
+                        teams[member.team] = [];
+                    }
+                    teams[member.team].push(member);
+                });
+
+                // 팀 컨테이너에 추가
+                const teamContainer = document.getElementById("teamContainer");
+                teamContainer.innerHTML = '';
+
+                Object.keys(teams).forEach(teamName => {
+                    // 팀을 직급 순서대로 정렬
+                    const sortedMembers = teams[teamName].sort((a, b) => {
+                        const rankOrder = { '팀장': 1, '과장': 2, '대리': 3, '인턴': 4 };
+                        return rankOrder[a.character] - rankOrder[b.character];
+                    });
+
+                    // 팀 HTML 구성
+                    const teamElement = document.createElement("div");
+                    teamElement.className = "team";
+                    teamElement.innerHTML = `<h2>${teamName}</h2>`;
+
+                    // 팀원 목록 생성
+                    const memberContainer = document.createElement("div");
+                    memberContainer.className = "member";
+
+                    sortedMembers.forEach(member => {
+                        const memberCard = document.createElement("div");
+                        memberCard.className = "member-card";
+                        memberCard.innerHTML = `
+                            <img src="images/${member.image}" alt="${member.character}">
+                            <div class="info">
+                                <strong>${member.name} (${member.character})</strong><br>
+                                <span class="difficulty">난이도: ${member.missionDifficulty}</span>
+                            </div>
+                        `;
+                        memberContainer.appendChild(memberCard);
+                    });
+
+                    teamElement.appendChild(memberContainer);
+                    teamContainer.appendChild(teamElement);
+                });
+            } catch (error) {
+                console.error("데이터를 불러오는 중 오류 발생:", error);
+            }
+        }
+
+        loadOrganizationChart();
+    </script>
+</body>
+</html>
