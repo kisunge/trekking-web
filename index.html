@@ -73,14 +73,14 @@
             transform: scale(1.05);
         }
 
-        /* ✅ resultBox 중앙 정렬 & 기본적으로 숨김 */
+        /* ✅ resultBox 내부 텍스트 폰트 적용 */
         .result {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             display: none; /* 기본적으로 숨김 */
-            background: rgba(255, 255, 255);
+            background: rgb(255, 255, 255); /* 완전 불투명 */
             color: black;
             padding: 15px;
             border-radius: 10px;
@@ -88,6 +88,14 @@
             width: 90%;
             max-width: 300px;
             text-align: center;
+            font-family: 'CustomFont', sans-serif; /* ✅ neodgm.ttf 적용 */
+        }
+
+        /* resultBox 내부 개별 요소에도 폰트 적용 */
+        .character-name,
+        .character-mission-difficulty,
+        .character-mission {
+            font-family: 'CustomFont', sans-serif; /* ✅ neodgm.ttf 적용 */
         }
 
         .character-img {
@@ -146,7 +154,7 @@
                 if (data.character) {
                     document.getElementById("characterName").innerText = data.character;
                     document.getElementById("characterImage").src = data.image;
-                    document.getElementById("characterMissionDifficulty").innerText = `난이도: ${data.missionDifficulty}`;
+                    document.getElementById("characterMissionDifficulty").innerText = `난이도 : ${data.missionDifficulty}`;
                     document.getElementById("characterMission").innerText = data.mission;
                     document.getElementById("resultBox").style.display = "block";
                 }
