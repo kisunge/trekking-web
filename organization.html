@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[이음상사 팀 조직도]</title>
+    <title>이음상사 팀 조직도</title>
     <style>
         @font-face {
             font-family: 'CustomFont';
@@ -29,10 +29,10 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 15px;
+            gap: 0px;
             overflow-y: auto; /* 조직도 내용만 스크롤 가능하도록 설정 */
             max-height: 80vh; /* 화면의 80% 높이까지만 조직도 표시 */
-            padding: 15px;
+            padding: 0px;
             background: rgba(255, 255, 255, 0.8); /* 가독성을 높이기 위해 투명 배경 추가 */
             border-radius: 10px;
         }
@@ -57,7 +57,7 @@
             gap: 10px;
         }
 
-                .member-card img {
+        .member-card img {
             width: 60px;  /* 가로 크기만 조정 */
             height: auto;  /* 세로 비율 자동 유지 */
             border-radius: 10px; /* 둥근 모서리 */
@@ -132,7 +132,7 @@
                             <img src="images/${member.image}" alt="${member.character}">
                             <div class="info">
                                 <strong>${member.name} (${member.character})</strong><br>
-                                <span class="difficulty">미션 난이도 ${member.missionDifficulty}</span>
+                                <span class="difficulty">미션 난이도 : ${member.missionDifficulty}</span>
                             </div>
                         `;
                         memberContainer.appendChild(memberCard);
