@@ -44,10 +44,10 @@
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
             width: 90%;
             max-width: 300px;
-            text-align: center;
+            text-align: center; /* 내부 요소 중앙 정렬 */
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: center; /* 내부 요소 중앙 정렬 */
             justify-content: center;
         }
 
@@ -55,7 +55,7 @@
             width: 80px;
             height: auto;
             margin-top: 10px;
-            display: block;
+            display: block; /* 이미지 중앙 정렬 */
         }
 
         .character-name {
@@ -65,7 +65,6 @@
         }
 
         .character-mission-difficulty {
-            font-family: 'CustomFont', sans-serif !important;
             font-size: 14px;
             font-weight: bold;
             color: red;
@@ -73,11 +72,11 @@
         }
 
         .character-mission {
-            font-family: 'CustomFont', sans-serif !important;
             font-size: 14px;
             margin-top: 5px;
         }
 
+        /* 반응형 설정 */
         @media (max-width: 600px) {
             .container {
                 width: 95%;
