@@ -13,7 +13,10 @@
         body {
             font-family: 'CustomFont', sans-serif;
             text-align: center;
-            background-color: #f4f4f4;
+            background: url('images/background_organization.png') repeat;
+            background-size: cover; /* 전체 배경에 적용 */
+            background-position: center;
+            background-color: #A7C7A5; /* 배경 이미지 없는 부분을 자연스럽게 처리 */
             padding: 20px;
         }
 
@@ -27,6 +30,11 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
+            overflow-y: auto; /* 조직도 내용만 스크롤 가능하도록 설정 */
+            max-height: 80vh; /* 화면의 80% 높이까지만 조직도 표시 */
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8); /* 가독성을 높이기 위해 투명 배경 추가 */
+            border-radius: 10px;
         }
 
         .team {
