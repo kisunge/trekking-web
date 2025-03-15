@@ -34,6 +34,16 @@
             max-width: 400px;
         }
 
+        h1 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
         input {
             font-size: 16px;
             padding: 10px;
@@ -53,6 +63,13 @@
             border: none;
             cursor: pointer;
             border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background: #ffdd44;
+            transform: scale(1.05);
         }
 
         .result {
@@ -62,6 +79,21 @@
             color: black;
             padding: 15px;
             border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 300px;
+        }
+
+        .character-img {
+            width: 80px; /* 크기 조절 */
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .character-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
         }
 
         .character-mission-difficulty {
@@ -69,6 +101,28 @@
             font-weight: bold;
             color: red;
             margin-top: 5px;
+        }
+
+        .character-mission {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* 반응형 설정 */
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            .character-img {
+                width: 70px; /* 모바일에서 이미지 크기 줄이기 */
+            }
+            .character-name {
+                font-size: 16px;
+            }
+            .character-mission-difficulty, .character-mission {
+                font-size: 12px;
+            }
         }
     </style>
 </head>
